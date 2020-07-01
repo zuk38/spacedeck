@@ -47,7 +47,7 @@ router.post('/', function(req, res) {
             })
             .then(() => {
               var domain = (process.env.NODE_ENV == "production") ? new URL(config.get('endpoint')).hostname : req.headers.hostname;
-              res.cookie('sdsession', data.token, { domain: domain, httpOnly: true });
+              res.cookie('sdsession', token, { domain: domain, httpOnly: true });
               res.status(201).json(session);
             });
         });
