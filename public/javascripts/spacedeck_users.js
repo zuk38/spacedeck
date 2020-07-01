@@ -85,7 +85,7 @@ SpacedeckUsers = {
       }
 
       create_session(email, password, function(session) {
-        console.log("session: ", session);
+        console.log("(test) session: ", session);
         this.loading_user = false;
         this.session = session;
         this.finalize_login(session.token, on_success);
