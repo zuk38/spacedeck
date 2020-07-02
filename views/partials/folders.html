@@ -168,7 +168,7 @@
         <span class="item-appendix">
           <span class="pull-right item-date">{{item.updated_at | date 'YYYY-MM-DD'}}</span>
 
-          <span class="item-author">
+          <span v-if="item.creator" class="item-author">
             <span class="profile-avatar btn btn-xs btn-icon btn-white btn-round m-r-10"
                   v-bind:style="background_image_style([item.creator.avatar_thumb_uri])"
                   v-bind:class="{'has-avatar-image':!!item.creator.avatar_thumb_uri}">
