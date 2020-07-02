@@ -149,7 +149,6 @@ var SpacedeckRoutes = {
               window._spacedeck_location_change = true;
               location.href = "/login";
             } else {
-
               if (this.logged_in && this.user.home_folder_id) {
                 this.load_space(this.user.home_folder_id);
               } else {

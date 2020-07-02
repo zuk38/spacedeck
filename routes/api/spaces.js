@@ -43,6 +43,9 @@ var spaceMapping = {
 };
 
 router.get('/', function(req, res, next) {
+  console.log("REQUEST", req)
+
+
   if (!req.user) {
     res.status(403).json({
       error: "auth required"

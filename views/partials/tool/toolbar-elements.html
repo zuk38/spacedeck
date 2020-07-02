@@ -2,21 +2,21 @@
   
   <div class="btn-group light vertical">
     
-    <a class="btn btn-icon btn-transparent"
-       title="[[__("home")]]" href="/spaces"
-       v-if="(!active_space.parent_space_id && !guest_nickname)">
-      <span class="icon icon-folder"></span>
-    </a>
-      
-    <a class="btn btn-icon btn-dark"
-       title="Parent Folder"
-       href="/folders/{{active_space.parent_space_id}}"
-       v-if="(active_space.parent_space_id && !guest_nickname)">
-      
-      <span class="icon icon-sd6 icon-svg"></span>
-    </a>
+<!--    <a class="btn btn-icon btn-transparent"-->
+<!--       title="[[__("home")]]" href="/spaces"-->
+<!--       v-if="(!active_space.parent_space_id && !guest_nickname)">-->
+<!--      <span class="icon icon-folder"></span>-->
+<!--    </a>-->
+<!--      -->
+<!--    <a class="btn btn-icon btn-dark"-->
+<!--       title="Parent Folder"-->
+<!--       href="/folders/{{active_space.parent_space_id}}"-->
+<!--       v-if="(active_space.parent_space_id && !guest_nickname)">-->
+<!--      -->
+<!--      <span class="icon icon-sd6 icon-svg"></span>-->
+<!--    </a>-->
 
-    <button class="btn btn-divider"></button>
+<!--    <button class="btn btn-divider"></button>-->
 
     <div class="dropdown top left light" v-bind:class="{open:opened_dialog=='shapes'}">
       <div class="btn-collapse in">
@@ -100,12 +100,12 @@
       </div>
     </div>
 
-    <button class="btn btn-transparent btn-icon-labeled"
-            v-if="active_space_role=='admin'"
-            v-on:click="activate_access()">
-      <span class="icon icon-share"></span>
-      <span class="icon-label">[[  __('share') ]]</span>
-    </button>
+<!--    <button class="btn btn-transparent btn-icon-labeled"-->
+<!--            v-if="active_space_role=='admin'"-->
+<!--            v-on:click="activate_access()">-->
+<!--      <span class="icon icon-share"></span>-->
+<!--      <span class="icon-label">[[  __('share') ]]</span>-->
+<!--    </button>-->
     
     <!--        
             <li v-on:click="edit_space_title()" v-if="logged_in">

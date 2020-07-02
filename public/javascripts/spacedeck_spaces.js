@@ -100,13 +100,13 @@ var SpacedeckSpaces = {
     },
     
     load_space: function(space_id, on_success, on_error) {
-
       console.log("load space: ", space_id);
       this.folder_spaces_filter="";
       this.folder_spaces_search="";
 
       space_auth = get_query_param("spaceAuth");
 
+      var spaceName = get_query_param('name');
       var userReady = function() {
         this.close_dropdown();
 
@@ -163,6 +163,15 @@ var SpacedeckSpaces = {
 
               if (is_home) {
                 this.root_folder = space;
+
+                if (spaceName) {
+                  if (space.children && space.children.find(c => c.name === spaceName)) {
+                    var currentSpace = space.children.find(c => c.name === spaceName)
+                    this.redirect_to("/spaces/" + currentSpace._id);
+                  } else {
+                    this.create_space('space', spaceName);
+                  }
+                }
               }
 
               load_history(space, function(history) {
@@ -412,6 +421,7 @@ var SpacedeckSpaces = {
 
       if (!space_type) space_type = "space";
 
+      this.create_space_title = get_query_param('name');
       var s = {
         name: space_type == "space" ? __("untitled_space") : __("untitled_folder") ,
         artifacts: [],
