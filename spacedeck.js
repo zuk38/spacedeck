@@ -7,7 +7,8 @@ const config = require('config');
 const redis = require('./helpers/redis');
 const websockets = require('./helpers/websockets');
 
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const path = require('path');
 const cors = require('cors')
 
@@ -33,7 +34,7 @@ process.env['OPENSSL_CONF'] = '/dev/null';
 console.log("Booting Spacedeck Open… (environment: " + app.get('env') + ")");
 
 const corsOptions = {
-  origin: 'http://10.32.7.10:8080',
+  origin: 'http://localhost:4200',
   credentials: true,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
@@ -134,8 +135,12 @@ db.init();
 
 // START WEBSERVER
 const port = 9666;
+const options = {
+  key: fs.readFileSync('key.key'),
+  cert: fs.readFileSync('cert.crt')
+};
 
-const server = http.Server(app).listen(port, () => {
+const server = https.createServer(options, app).listen(port, () => {
   
   if ("send" in process) {
     process.send('online');
@@ -145,7 +150,7 @@ const server = http.Server(app).listen(port, () => {
   
   const host = server.address().address;
   const port = server.address().port;
-  console.log('Spacedeck Open listening at http://%s:%s', host, port);
+  console.log('Spacedeck Open listening at https://%s:%s', host, port);
 
 }).on('error', (error) => {
 
