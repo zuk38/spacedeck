@@ -53,6 +53,8 @@ router.get('/png', function(req, res, next) {
     
     phantom.takeScreenshot(req.space, "png", function(local_path) {
       var localResizedFilePath = local_path + ".thumb.jpg";
+
+      console.log(local_path);
       gm(local_path).resize(640, 480).quality(70.0).autoOrient().write(localResizedFilePath, function(err) {
         
         if (err) {

@@ -188,8 +188,25 @@ router.post('/', function(req, res, next) {
         };
         
         db.Membership.create(membership).then(() => {
-          res.status(201).json(createdSpace);
+          if (!attrs.viewer_id) {
+            res.status(201).json(createdSpace);
+          }
+
         });
+
+        if (attrs.viewer_id) {
+          var client_membership = {
+            _id: uuidv4(),
+            user_id: attrs.viewer_id,
+            space_id: attrs._id,
+            role: "viewer",
+            state: "active"
+          };
+
+          db.Membership.create(client_membership).then(() => {
+            res.status(201).json(createdSpace);
+          });
+        }
       });
     }
 

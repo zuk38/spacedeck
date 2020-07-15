@@ -23,6 +23,8 @@ var URL = require('url').URL;
 var express = require('express');
 var router = express.Router();
 var glob = require('glob');
+var jwt = require("jsonwebtoken");
+
 
 router.get('/current', function(req, res, next) {
   if (req.user) {
@@ -108,7 +110,9 @@ router.post('/', function(req, res) {
                           "state": "pending"
                         }
                       });
-                      res.status(201).json({});          
+                      res.status(201).json({
+                        id: u._id
+                      });
                     })
                     .error(err => {
                       res.status(400).json(err);
@@ -125,7 +129,8 @@ router.post('/', function(req, res) {
       if (users.length == 0) {
         createUser();
       } else {
-        res.status(400).json({"error":"user_email_already_used"});
+        console.log(users);
+        res.status(400).json({"error":"user_email_already_used", id: users[0]._id});
       }
     })
 });
@@ -303,6 +308,28 @@ router.post('/:user_id/confirm', function(req, res, next) {
     name: req.i18n.__("confirm_action")
   }});
   res.sendStatus(201);
+});
+
+router.post('/get_token', function(req, res, next) {
+  var token = jwt.sign(req.body, config.token_secret, { expiresIn: '1800s' });
+
+  res.status(200).json({
+    token
+  });
+});
+
+router.post('/check_token', function(req, res, next) {
+  const token = req.body.token;
+
+  if (token == null) return res.sendStatus(401) // if there isn't any token
+
+  jwt.verify(token, config.token_secret, (err, data) => {
+    if (err) return res.sendStatus(403)
+
+    console.log(data);
+
+    res.status(200).json(data);
+  })
 });
 
 module.exports = router;

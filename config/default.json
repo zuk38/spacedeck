@@ -3,6 +3,7 @@
   "contact_email": "support@macrix.com",
 
   "endpoint": "http://localhost:9666",
+  "token_secret": "6mERk5Y1H50ttrQMtMYy-Ja3Bt-dFmNPMCJZ7c5SwHYRFjaPFKGypEK00b7f7iqtV4Rv7pgL3cn6pOTqu9QPKNC-hOmFNnlnSyfJGuLPdHAdFX6bn9yBYLgVFmVh73kPA1RGw2d83yHgU8lQqoGvuatlsWdbvEUnGlXevo0LzVs",
 
   "storage_region": "eu-central-1",
   //"storage_bucket": "sdeck-development",
