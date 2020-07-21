@@ -34,7 +34,7 @@ process.env['OPENSSL_CONF'] = '/dev/null';
 console.log("Booting Spacedeck Open… (environment: " + app.get('env') + ")");
 
 const corsOptions = {
-  origin: 'https://10.32.7.10:8081',
+  origin: isProduction ? config.get('app_url') : 'http://localhost:4200',
   credentials: true,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
