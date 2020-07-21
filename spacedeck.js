@@ -60,15 +60,19 @@ swig.setFilter('cdn', function(input, idx) {
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 
-if (isProduction) {
-  app.set('views', path.join(__dirname, 'build', 'views'));
-  app.use(favicon(path.join(__dirname, 'build', 'assets', 'images', 'favicon.png')));
-  app.use(express.static(path.join(__dirname, 'build', 'assets')));
-} else {
-  app.set('views', path.join(__dirname, 'views'));
-  app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
-  app.use(express.static(path.join(__dirname, 'public')));
-}
+// if (isProduction) {
+//   app.set('views', path.join(__dirname, 'build', 'views'));
+//   app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
+//   app.use(express.static(path.join(__dirname, 'build', 'assets')));
+// } else {
+//   app.set('views', path.join(__dirname, 'views'));
+//   app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
+//   app.use(express.static(path.join(__dirname, 'public')));
+// }
+
+app.set('views', path.join(__dirname, 'views'));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json({
   limit: '50mb'
