@@ -33,8 +33,16 @@ process.env['OPENSSL_CONF'] = '/dev/null';
 
 console.log("Booting Spacedeck Open… (environment: " + app.get('env') + ")");
 
+const whitelist = config.get('app_url').split(',');
+
 const corsOptions = {
-  origin: isProduction ? config.get('app_url') : 'http://localhost:4200',
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
