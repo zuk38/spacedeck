@@ -148,8 +148,8 @@ db.init();
 // START WEBSERVER
 const port = 9666;
 const options = {
-  key: fs.readFileSync('/certs/privkey.key'),
-  cert: fs.readFileSync('/certs/cert.crt')
+  key: fs.readFileSync('/certs/privkey.pem'),
+  cert: fs.readFileSync('/certs/cert.pem')
 };
 
 const server = https.createServer(options, app).listen(port, () => {
